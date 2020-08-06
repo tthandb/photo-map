@@ -13,11 +13,13 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
+    "assetBundlePatterns": ["**/*"],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.lab.photomap"
+    },
+    "android": {
+      "package": "com.lab.photomap"
     },
     "web": {
       "favicon": "./assets/favicon.png"
