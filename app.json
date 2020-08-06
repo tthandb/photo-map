@@ -19,7 +19,10 @@
       "bundleIdentifier": "com.lab.photomap"
     },
     "android": {
-      "package": "com.lab.photomap"
+      "package": "com.lab.photomap",
+      "config": {
+        "googleMaps": { "apiKey": "AIzaSyCMUDgEYV8Rjm-AvvGaBrZizG9XAASUjrk" }
+      }
     },
     "web": {
       "favicon": "./assets/favicon.png"
