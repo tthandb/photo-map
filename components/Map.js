@@ -1,11 +1,21 @@
 import React from "react";
-import { View } from "react-native";
+import { View, Dimensions } from "react-native";
 import MapView from "react-native-maps";
+import { Text, StyleSheet, SafeAreaView } from "react-native";
 
-const Map = () => {
+const Map = (props) => {
   return (
     <View style={styles.container}>
-      <MapView style={styles.mapStyle} />
+      <MapView
+        style={styles.mapStyle}
+        // initialRegion={{
+        //   latitude: 37.78825,
+        //   longitude: -122.4324,
+        //   latitudeDelta: 0.0922,
+        //   longitudeDelta: 0.0421,
+        // }}
+        region={props.location}
+      />
     </View>
   );
 };

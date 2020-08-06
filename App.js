@@ -1,62 +1,45 @@
-// import React, { useState, useEffect } from "react";
-// import { Text, View, StyleSheet, SafeAreaView } from "react-native";
-// import * as Location from "expo-location";
+import React, { useState, useEffect } from "react";
+import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import * as Location from "expo-location";
+import Map from "./components/Map";
+import { latitudeDelta, longitudeDelta } from "./utils/Constants";
 
-// export default function App() {
-//   const [location, setLocation] = useState(null);
-//   const [errorMsg, setErrorMsg] = useState(null);
+export default function App() {
+  const [location, setLocation] = useState(null);
+  const [errorMsg, setErrorMsg] = useState(null);
 
-//   useEffect(() => {
-//     (async () => {
-//       let { status } = await Location.requestPermissionsAsync();
-//       if (status !== "granted") {
-//         setErrorMsg("Permission to access location was denied");
-//       }
+  useEffect(() => {
+    (async () => {
+      let { status } = await Location.requestPermissionsAsync();
+      if (status !== "granted") {
+        setErrorMsg("Permission to access location was denied");
+      }
 
-//       let location = await Location.getCurrentPositionAsync({});
-//       setLocation(location);
-//     })();
-//   });
+      let location = await Location.getCurrentPositionAsync({});
+      setLocation({
+        latitude: location.coords.latitude,
+        longitude: location.coords.longitude,
+        latitudeDelta: latitudeDelta,
+        longitudeDelta: longitudeDelta,
+      });
+    })();
+  });
 
-//   let text = "Waiting..";
-//   if (errorMsg) {
-//     text = errorMsg;
-//   } else if (location) {
-//     text = JSON.stringify(location);
-//   }
-
-//   return (
-//     <SafeAreaView style={styles.container}>
-//       <Text>{text}</Text>
-//     </SafeAreaView>
-//   );
-// }
-
-// const styles = StyleSheet.create({
-//   container: {
-//     flex: 1,
-//   },
-// });
-import React from "react";
-import { StyleSheet, Text, View } from "react-native";
-import MapView from "react-native-maps";
-export default class App extends React.Component {
-  render() {
-    return (
-      <MapView
-        style={{
-          flex: 1,
-        }}
-        initialRegion={{
-          latitude: 37.78825,
-          longitude: -122.4324,
-          latitudeDelta: 0.0922,
-          longitudeDelta: 0.0421,
-        }}
-      />
-      // <View>
-      //   <Text>Binh</Text>
-      // </View>
-    );
+  let text = "Waiting..";
+  if (errorMsg) {
+    text = errorMsg;
+  } else if (location) {
+    text = JSON.stringify(location);
   }
+  return (
+    <SafeAreaView style={styles.container}>
+      <Map location={location} />
+    </SafeAreaView>
+  );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
