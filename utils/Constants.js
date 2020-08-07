@@ -1,2 +1,2 @@
-export const latitudeDelta = 0.0922;
-export const longitudeDelta = 0.0421;
+export const LATITUDE_DELTA = 0.0922;
+export const LONGITUDE_DELTA = 0.0421;

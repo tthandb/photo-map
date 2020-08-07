@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Text, View, StyleSheet, SafeAreaView } from "react-native";
 import * as Location from "expo-location";
 import Map from "./components/Map";
-import { latitudeDelta, longitudeDelta } from "./utils/Constants";
+import { LATITUDE_DELTA, LONGITUDE_DELTA } from "./utils/Constants";
 
 export default function App() {
   const [location, setLocation] = useState(null);
@@ -19,8 +19,8 @@ export default function App() {
       setLocation({
         latitude: location.coords.latitude,
         longitude: location.coords.longitude,
-        latitudeDelta: latitudeDelta,
-        longitudeDelta: longitudeDelta,
+        latitudeDelta: LATITUDE_DELTA,
+        longitudeDelta: LONGITUDE_DELTA,
       });
     })();
   });

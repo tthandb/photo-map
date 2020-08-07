@@ -1,8 +1,8 @@
 Arguments: 
-  C:\Program Files\nodejs\node.exe C:\Users\tthan\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add expo-constants@~9.1.1
+  C:\Program Files\nodejs\node.exe C:\Users\tthan\AppData\Roaming\npm\node_modules\yarn\bin\yarn.js add expo-image-picker@~8.3.0
 
 PATH: 
-  C:\cmder\bin;C:\cmder\vendor\bin;C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Java\jdk-13.0.2\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Gradle\gradle-6.4.1\bin;C:\Program Files\Java\jdk-14.0.1\bin;C:\Program Files (x86)\Common Files\Adobe\AGL;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\tthan\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tthan\AppData\Roaming\npm;C:\tools\neovim\Neovim\bin;%PyCharm Community Edition%;D:\Android\tools\bin\platform-tools;C:\Users\tthan\AppData\Local\hyper\app-3.0.2\resources\bin;C:\Program Files\Git\mingw64\bin;C:\Program Files\Git\usr\bin;C:\cmder;C:\cmder\vendor\git-for-windows\cmd;C:\cmder\vendor\git-for-windows\mingw64\bin;C:\cmder\vendor\git-for-windows\usr\bin
+  C:\Program Files (x86)\Common Files\Oracle\Java\javapath;C:\Windows\system32;C:\Windows;C:\Windows\System32\Wbem;C:\Windows\System32\WindowsPowerShell\v1.0\;C:\Windows\System32\OpenSSH\;C:\MinGW\bin;C:\Program Files\nodejs\;C:\Program Files (x86)\NVIDIA Corporation\PhysX\Common;C:\Program Files\NVIDIA Corporation\NVIDIA NvDLISR;C:\Program Files\Java\jdk-13.0.2\bin;C:\ProgramData\chocolatey\bin;C:\Program Files\Git\cmd;C:\Gradle\gradle-6.4.1\bin;C:\Program Files\Java\jdk-14.0.1\bin;C:\Program Files (x86)\Common Files\Adobe\AGL;%USERPROFILE%\AppData\Local\Microsoft\WindowsApps;C:\Users\tthan\AppData\Local\Programs\Microsoft VS Code\bin;C:\Users\tthan\AppData\Roaming\npm;C:\tools\neovim\Neovim\bin;%PyCharm Community Edition%;D:\Android\tools\bin\platform-tools;;C:\Users\tthan\AppData\Local\hyper\app-3.0.2\resources\bin
 
 Yarn version: 
   1.22.4
@@ -14,7 +14,7 @@ Platform:
   win32 x64
 
 Trace: 
-  Error: EPERM: operation not permitted, unlink 'E:\devc\photo-map\node_modules\@babel\compat-data\node_modules\.bin'
+  Error: EPERM: operation not permitted, lstat 'E:\devc\photo-map\node_modules\@babel\compat-data\node_modules'
 
 npm manifest: 
   {
@@ -33,6 +33,7 @@ npm manifest:
       "react": "~16.11.0",
       "react-dom": "~16.11.0",
       "react-native": "https://github.com/expo/react-native/archive/sdk-38.0.2.tar.gz",
+      "react-native-maps": "0.27.1",
       "react-native-web": "~0.11.7"
     },
     "devDependencies": {
@@ -4445,6 +4446,11 @@ Lockfile:
       fbemitter "^2.1.1"
       invariant "^2.2.4"
       use-subscription "^1.0.0"
+  
+  react-native-maps@0.27.1:
+    version "0.27.1"
+    resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.27.1.tgz#2f10cd417bb2fd938c9e015b1c9b6d9b1a44b97f"
+    integrity sha512-HygBkZBecTnIVRYrSiLRAvu4OmXOYso/A7c6Cy73HkOh9CgGV8Ap5eBea24tvmFGptjj5Hg8AJ94/YbmWK1Okw==
   
   react-native-safe-area-context@~3.0.7:
     version "3.0.7"
