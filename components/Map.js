@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, Dimensions, Button, Text, StyleSheet, Image } from "react-native";
+import Lightbox from 'react-native-lightbox';
 import MapView from "react-native-maps";
 import { Callout } from "react-native-maps";
 import * as Permissions from 'expo-permissions';
@@ -8,7 +9,6 @@ import { getPermissionsAsync } from "expo-location";
 
 const Map = props => {
 	const [locations, setLocations] = useState([]);
-	const [image, setImage] = useState(null);
 	getPermissionAsync = async () => {
 		if (Constants.platform.ios) {
 			const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
@@ -29,7 +29,6 @@ const Map = props => {
 				const newLocations = locations;
 				newLocations[id].image = result.uri;
 				setLocations(newLocations)
-				setImage(result.uri)
 			}
 
 			console.log(result);
@@ -67,7 +66,9 @@ const Map = props => {
 								alphaHitTest={true}>
 								<Text>Marker {id}</Text>
 								<Button title="Pick an image from camera roll" onPress={() => _pickImage(id)} />
-								{element.image && <Image source={{ uri: element.image }} style={{ width: 50, height: 50 }} />}
+								<Lightbox navigator={navigator}>
+									{element.image && <Image source={{ uri: element.image }} style={{ width: 100, height: 100 }} />}
+								</Lightbox>
 							</Callout>
 						</MapView.Marker>
 					);
