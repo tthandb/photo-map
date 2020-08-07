@@ -1,18 +1,55 @@
-import React, { useState } from "react";
-import { View, Dimensions } from "react-native";
+import React, { useState, useEffect } from "react";
+import { View, Dimensions, Button, Text, StyleSheet, Image } from "react-native";
 import MapView from "react-native-maps";
-import { Text, StyleSheet, SafeAreaView } from "react-native";
-import {Callout} from "react-native-maps";
+import { Callout } from "react-native-maps";
+import * as Permissions from 'expo-permissions';
+import * as ImagePicker from 'expo-image-picker';
+import { getPermissionsAsync } from "expo-location";
 
 const Map = props => {
 	const [locations, setLocations] = useState([]);
+	const [image, setImage] = useState(null);
+	getPermissionAsync = async () => {
+		if (Constants.platform.ios) {
+			const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
+			if (status !== 'granted') {
+				alert('Sorry, we need camera roll permissions to make this work!');
+			}
+		}
+	};
+	_pickImage = async (id) => {
+		try {
+			let result = await ImagePicker.launchImageLibraryAsync({
+				mediaTypes: ImagePicker.MediaTypeOptions.All,
+				allowsEditing: true,
+				aspect: [4, 3],
+				quality: 1,
+			});
+			if (!result.cancelled) {
+				const newLocations = locations;
+				newLocations[id].image = result.uri;
+				setLocations(newLocations)
+				setImage(result.uri)
+			}
+
+			console.log(result);
+		} catch (E) {
+			console.log(E);
+		}
+	};
 	const onLongPress = props => {
 		console.log(props.nativeEvent.coordinate);
-		const listLocations = locations;
+		const newLocations = locations;
 		if (props.nativeEvent !== null && props.nativeEvent !== undefined)
-			listLocations.push(props.nativeEvent.coordinate);
-		setLocations(listLocations);
+			newLocations.push({
+				coordinate: props.nativeEvent.coordinate,
+				image: null
+			});
+		setLocations(newLocations);
 	};
+	useEffect(() => {
+		getPermissionsAsync();
+	}, [])
 	return (
 		<View style={styles.container}>
 			<MapView
@@ -24,11 +61,14 @@ const Map = props => {
 					return (
 						<MapView.Marker
 							key={id}
-							coordinate={element}
+							coordinate={element.coordinate}
 						>
-								<Callout tooltip={false}
+							<Callout tooltip={false}
 								alphaHitTest={true}>
-									<Text>Marker {id}</Text></Callout>
+								<Text>Marker {id}</Text>
+								<Button title="Pick an image from camera roll" onPress={() => _pickImage(id)} />
+								{element.image && <Image source={{ uri: element.image }} style={{ width: 50, height: 50 }} />}
+							</Callout>
 						</MapView.Marker>
 					);
 				})}
