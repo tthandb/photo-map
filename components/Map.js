@@ -2,14 +2,13 @@ import React, { useState, useEffect } from "react";
 import { View, Dimensions, Button, Text, StyleSheet, Image } from "react-native";
 import Lightbox from 'react-native-lightbox';
 import MapView from "react-native-maps";
-import { Callout } from "react-native-maps";
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
-import { getPermissionsAsync } from "expo-location";
+import CustomCallout from "./CustomCallout"
 
 const Map = props => {
 	const [locations, setLocations] = useState([]);
-	getPermissionAsync = async () => {
+	const getPermissionAsync = async () => {
 		if (Constants.platform.ios) {
 			const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 			if (status !== 'granted') {
@@ -17,7 +16,7 @@ const Map = props => {
 			}
 		}
 	};
-	_pickImage = async (id) => {
+	const pickImage = async (id) => {
 		try {
 			let result = await ImagePicker.launchImageLibraryAsync({
 				mediaTypes: ImagePicker.MediaTypeOptions.All,
@@ -32,8 +31,8 @@ const Map = props => {
 			}
 
 			console.log(result);
-		} catch (E) {
-			console.log(E);
+		} catch (error) {
+			console.log(error);
 		}
 	};
 	const onLongPress = props => {
@@ -47,7 +46,7 @@ const Map = props => {
 		setLocations(newLocations);
 	};
 	useEffect(() => {
-		getPermissionsAsync();
+		getPermissionAsync();
 	}, [])
 	return (
 		<View style={styles.container}>
@@ -56,20 +55,13 @@ const Map = props => {
 				region={props.location}
 				onLongPress={onLongPress}
 			>
-				{locations.map((element, id) => {
+				{locations.map((location, id) => {
 					return (
 						<MapView.Marker
 							key={id}
-							coordinate={element.coordinate}
+							coordinate={location.coordinate}
 						>
-							<Callout tooltip={false}
-								alphaHitTest={true}>
-								<Text>Marker {id}</Text>
-								<Button title="Pick an image from camera roll" onPress={() => _pickImage(id)} />
-								<Lightbox navigator={navigator}>
-									{element.image && <Image source={{ uri: element.image }} style={{ width: 100, height: 100 }} />}
-								</Lightbox>
-							</Callout>
+							<CustomCallout id={id} location={location} handlePickImage={pickImage} />
 						</MapView.Marker>
 					);
 				})}

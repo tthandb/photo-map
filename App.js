@@ -1,9 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, StyleSheet, SafeAreaView } from "react-native";
+import { Text, View, StyleSheet, SafeAreaView, Image, TouchableOpacity } from "react-native";
 import * as Location from "expo-location";
 import Map from "./components/Map";
 import { LATITUDE_DELTA, LONGITUDE_DELTA } from "./utils/Constants";
+import Lightbox from 'react-native-lightbox';
+import { YellowBox } from 'react-native';
 
+YellowBox.ignoreWarnings([
+  'Animated: `useNativeDriver` was not specified.',
+]);
 export default function App() {
   const [location, setLocation] = useState(null);
   const [errorMsg, setErrorMsg] = useState(null);
@@ -42,4 +47,8 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
   },
+  contain: {
+    flex: 1,
+    height: 150,
+  }
 });
