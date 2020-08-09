@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from "react";
-import { View, Dimensions, Button, Text, StyleSheet, Image } from "react-native";
-import Lightbox from 'react-native-lightbox';
+import React, { useState, useEffect, useMemo } from "react";
+import { View, Dimensions, StyleSheet, Platform } from "react-native";
 import MapView from "react-native-maps";
 import * as Permissions from 'expo-permissions';
 import * as ImagePicker from 'expo-image-picker';
@@ -9,13 +8,14 @@ import CustomCallout from "./CustomCallout"
 const Map = props => {
 	const [locations, setLocations] = useState([]);
 	const getPermissionAsync = async () => {
-		if (Constants.platform.ios) {
+		if (Platform.ios) {
 			const { status } = await Permissions.askAsync(Permissions.CAMERA_ROLL);
 			if (status !== 'granted') {
 				alert('Sorry, we need camera roll permissions to make this work!');
 			}
 		}
 	};
+	useMemo(() => getPermissionAsync(), []);
 	const pickImage = async (id) => {
 		try {
 			let result = await ImagePicker.launchImageLibraryAsync({
