@@ -45,6 +45,7 @@ const Map = (props) => {
         const newLocations = locations;
         newLocations[id].image = result.uri;
         setLocations(newLocations);
+        // _storeData(newLocations);
       }
 
       console.log(result);
@@ -61,7 +62,7 @@ const Map = (props) => {
         image: null,
       });
     setLocations(newLocations);
-    _storeData(newLocations);
+    // _storeData(newLocations);
   };
   useEffect(() => {
     getPermissionAsync();
