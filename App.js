@@ -50,5 +50,5 @@ const styles = StyleSheet.create({
   contain: {
     flex: 1,
     height: 150,
-  }
+  },
 });
